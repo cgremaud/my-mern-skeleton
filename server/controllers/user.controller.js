@@ -16,3 +16,13 @@ const create = async (req, res, next) => {
         })
     }
 }
+
+const list = async (req, res) => {
+    try {
+        let users = await User.find().select('name email updated created')
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}

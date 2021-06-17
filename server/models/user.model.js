@@ -37,7 +37,7 @@ UserSchema.virtual('password').set(function(password) {
     return this._password
 })
 
-//defines all of the methods associated with a User object?
+//defines *extra/extended of the methods associated with a User object. It already has methods like .find(), etc.
 UserSchema.methods = {
     authenticate: function(plainText) {
         return this.encryptPassword(plainText) === this.hashed_password
