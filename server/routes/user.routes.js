@@ -11,6 +11,8 @@ router.route('/api/users').get(userCtrl.list).post(userCtrl.create) //so this ma
 
 router.route('/api/users/:userId').get(userCtrl.read).put(userCtrl.updates).delete(userCtrl.remove)
 
+//this line means that any time a request is sent with a userId, the userById function is called before the function it's being routed to. 
+//this then appends the user object onto the request object before passing it on using next().
 router.param('userId', userCtrl.userById)
 
 export default router
