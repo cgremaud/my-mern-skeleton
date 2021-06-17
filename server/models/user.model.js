@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema({
     salt: String
 }) 
 
+//handles the plaintext password as a virtual field
 UserSchema.virtual('password').set(function(password) {
     this._password = password
     this.salt = this.makeSalt()
@@ -33,5 +34,23 @@ UserSchema.virtual('password').set(function(password) {
 }).get(function() {
     return this._password
 })
+
+//defines all of the methods associated with a User object?
+UserSchema.methods = {
+    authenticate: function(plainText) {
+        return this.encryptPassword(plainText) === this.hashed_password
+    },
+    encryptPassword: function(password) {
+        if (!password) return ''
+        try {
+            return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+        } catch (err) {
+            return ''
+        }
+    },
+    makeSalt: function() {
+        return Math.round((new Date().valueOf()) * Math.random()) + ''
+    }
+}
 
 export default mongoose.model('User', UserSchema)
