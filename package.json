@@ -1,0 +1,10 @@
+{
+  "name": "mern_skeleton",
+  "version": "1.0.0",
+  "description": "Following along with the book",
+  "main": "index.js",
+  "repository": "https://github.com/cgremaud/my-mern-skeleton",
+  "author": "C. Gremaud <colyn.gremaud@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
