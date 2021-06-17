@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+//creates a new schema to map js user objects onto mongoDB documents. takes an object as a schema defition
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -17,7 +18,12 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    updated: Date //I guess you don't need the {} if it's only one k/v pair? 
-}) //creates a new schema to map js user objects onto mongoDB documents. takes an object as a schema defition
+    updated: Date,
+    hashed_password: {
+        type: String,
+        required: 'Password is required'
+    },
+    salt: String
+}) 
 
 export default mongoose.model('User', UserSchema)
