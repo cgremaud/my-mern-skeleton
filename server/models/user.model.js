@@ -27,6 +27,8 @@ const UserSchema = new mongoose.Schema({
 }) 
 
 //handles the plaintext password as a virtual field
+//I'd guess that .set and .get take getter and setter functions as arguments. And the setter has to generate a salt to add to the hash 
+//and I'd guess that the _ before password indicates it's a virtual field. 
 UserSchema.virtual('password').set(function(password) {
     this._password = password
     this.salt = this.makeSalt()
